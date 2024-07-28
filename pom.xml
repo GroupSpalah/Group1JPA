@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+<!--
+groupId, artifactId - //В Maven каждый проект идентифицируется парой groupId artifactId. Во избежание конфликта имён,
+		groupId - наименование организации или подразделения и обычно действуют такие же правила
+		как и при именовании пакетов в Java - записывают доменное имя организации или сайта проекта.
+		artifactId - название проекта. Внутри тэга version, как можно догадаться хранится версия проекта.
+		Тройкой groupId, artifactId, version (далее - GAV) можно однозначно идентифицировать jar файл приложения
+		или библиотеки. Если состояние кода для проекта не зафиксировано, то в конце к имени версии
+		добавляется "-SNAPSHOT" что обозначает, что версия в разработке и результирующий jar файл может меняться.
+-->
+    <groupId>org.com</groupId>
+    <artifactId>Group1JPA</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.5.2.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+
+    
+</project>
