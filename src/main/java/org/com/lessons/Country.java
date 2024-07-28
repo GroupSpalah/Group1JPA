@@ -1,4 +1,4 @@
-package org.com;
+package org.com.lessons;
 
 import jakarta.persistence.*;
 import lombok.*;
