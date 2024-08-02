@@ -1,4 +1,4 @@
-package org.com.homeworks.vladyslav_lazin.hw_28_07_24.dao.impl;
+package org.com.homeworks.vladyslav_lazin.hw_28_07_24.dao;
 
 import org.com.homeworks.vladyslav_lazin.hw_28_07_24.domain.Person;
 
