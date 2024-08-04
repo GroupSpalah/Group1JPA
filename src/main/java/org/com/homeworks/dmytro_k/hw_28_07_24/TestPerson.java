@@ -9,10 +9,11 @@ import lombok.Cleanup;
 public class TestPerson {
     public static void main(String[] args) {
 
-        Person John = Person
+        DKPerson John = DKPerson
                 .builder()
                 .firstName("John")
                 .lastName("Doe")
+                .age(30)
                 .build();
 
         @Cleanup
@@ -27,7 +28,7 @@ public class TestPerson {
 
         //entityManager.persist(John);
 
-        Person person = entityManager.find(Person.class, 1);
+        DKPerson person = entityManager.find(DKPerson.class, 1);
 
         System.out.println(person);
 

@@ -11,11 +11,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Person {
+public class DKPerson {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
-
     String firstName;
     String lastName;
+    int age;
 }
