@@ -1,4 +1,4 @@
-package homeworks.sergii_khvostov.hw_28_07_24;
+package org.com.homeworks.sergii_khvostov.hw_28_07_24;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

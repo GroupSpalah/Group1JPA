@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
@@ -18,14 +20,25 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
 
+    @Column(name = "first_name", length = 50)
+    String firstName;//first_name -sql, firstName
+
     String name;
+
+    @Enumerated(EnumType.STRING)
+    Region region;
+
+    LocalDate date;
 }
 
 class TestJpa {
     public static void main(String[] args) {
         Country ukraine = Country
                 .builder()
-                .name("Ukraine")
+                .name("Canada")
+                .date(LocalDate.now())
+                .region(Region.KHARKIV)
+                .firstName("Canada")
                 .build();
 
         @Cleanup

@@ -1,16 +1,10 @@
-package homeworks.sergii_khvostov.hw_28_07_24;
+package org.com.lessons;
 
 import jakarta.persistence.*;
 import lombok.Cleanup;
 
-
-public class ServicePersonJPA {
+class FindObjectByParams {
     public static void main(String[] args) {
-        PersonJPA personJPA = PersonJPA.builder()
-                .firstName("John")
-                .lastName("Doe")
-                .age(30)
-                .build();
 
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("test-jpa");
@@ -22,8 +16,22 @@ public class ServicePersonJPA {
 
         transaction.begin();
 
-        em.persist(personJPA);
+        TypedQuery<Country> query = em.createQuery("FROM Country c WHERE c.region =:r_name", Country.class);
+
+        query.setParameter("r_name", Region.DNIPRO);
+
+        Country canada = query.getSingleResult();
+
+        System.out.println(canada);
+
 
         transaction.commit();
+
     }
 }
+
+/**
+ * 1 2 3 4
+ *
+ *
+ */

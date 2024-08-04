@@ -1,0 +1,2 @@
+1) Delete notebook by processor
+2) Delete notebook by RAM and SSD
