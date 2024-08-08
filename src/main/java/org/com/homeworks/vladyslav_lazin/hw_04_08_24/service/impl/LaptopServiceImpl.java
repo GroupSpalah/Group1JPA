@@ -1,60 +1,67 @@
-package homeworks.vladyslav_lazin.hw_2024.hw_02_06_24.service.impl;
+package org.com.homeworks.vladyslav_lazin.hw_04_08_24.service.impl;
 
-import homeworks.vladyslav_lazin.hw_2024.hw_02_06_24.dao.LaptopDao;
-import homeworks.vladyslav_lazin.hw_2024.hw_02_06_24.entity.Laptop;
-import homeworks.vladyslav_lazin.hw_2024.hw_02_06_24.service.LaptopService;
 
 import java.util.List;
+import java.time.LocalDate;
+
+import org.com.homeworks.vladyslav_lazin.hw_04_08_24.dao.LaptopDao;
+import org.com.homeworks.vladyslav_lazin.hw_04_08_24.dao.impl.LaptopDaoImpl;
+import org.com.homeworks.vladyslav_lazin.hw_04_08_24.domain.Laptop;
+import org.com.homeworks.vladyslav_lazin.hw_04_08_24.service.LaptopService;
 
 public class LaptopServiceImpl implements LaptopService {
     LaptopDao laptopDao;
-    @Override
-    public void addLaptop(Laptop laptop) {
-        laptopDao.addLaptop(laptop);
+
+    public LaptopServiceImpl() {
+        laptopDao = new LaptopDaoImpl();
     }
 
     @Override
-    public Laptop findLaptopById(int id) {
-        return laptopDao.findLaptopById(id);
+    public void save(Laptop laptop) {
+        laptopDao.save(laptop);
     }
 
     @Override
-    public List<Laptop> findAllLaptops() {
-        return laptopDao.findAllLaptops();
+    public Laptop findById(int id) {
+        return laptopDao.findById(id);
     }
 
     @Override
-    public void deletLaptopbyId(int id) {
-        laptopDao.findLaptopById(id);
+    public List<Laptop> findAll() {
+        return laptopDao.findAll();
     }
 
     @Override
-    public void deleteAllLaptops() {
-        laptopDao.deleteAllLaptops();
+    public void deleteById(int id) {
+        laptopDao.deleteById(id);   
     }
 
     @Override
-    public void updateLaptopById(int id, Laptop laptop) {
-        laptopDao.updateLaptopById(id, laptop);
+    public void deleteAll() {
+        laptopDao.deleteAll();
     }
 
     @Override
-    public List<Laptop> findLaptopByModel(String model) {
-        return laptopDao.findLaptopByModel(model);
+    public void update(int id, Laptop laptop) {
+        laptopDao.update(id, laptop);
     }
 
     @Override
-    public List<Laptop> findLaptopByProdDate(String prodDate) {
-        return laptopDao.findLaptopByProdDate(prodDate);
+    public List<Laptop> findByModel(String model) {
+        return laptopDao.findByModel(model);    }
+
+    @Override
+    public List<Laptop> findByProdDate(LocalDate prodDate) {
+        return laptopDao.findByProdDate(prodDate);
     }
 
     @Override
-    public List<Laptop> findLaptopByRamAnadSsd(int ram, int ssd) {
-        return laptopDao.findLaptopByRamAnadSsd(ram, ssd);
+    public List<Laptop> findByRamAndSsd(int ram, int ssd) {
+        return findByRamAndSsd(ram, ssd);
     }
 
     @Override
-    public List<Laptop> findLaptopByCpu(String cpu) {
-        return laptopDao.findLaptopByCpu(cpu);
+    public List<Laptop> findByCpu(String cpu) {
+        return laptopDao.findByCpu(cpu);
     }
 }

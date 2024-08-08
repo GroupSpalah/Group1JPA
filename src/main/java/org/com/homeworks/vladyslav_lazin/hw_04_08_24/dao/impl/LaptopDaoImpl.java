@@ -1,255 +1,145 @@
-package homeworks.vladyslav_lazin.hw_2024.hw_02_06_24.dao.impl;
+package org.com.homeworks.vladyslav_lazin.hw_04_08_24.dao.impl;
 
-import homeworks.vladyslav_lazin.hw_2024.hw_02_06_24.dao.LaptopDao;
-import homeworks.vladyslav_lazin.hw_2024.hw_02_06_24.entity.Laptop;
-
-import java.sql.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+
+import org.com.homeworks.vladyslav_lazin.hw_04_08_24.dao.LaptopDao;
+import org.com.homeworks.vladyslav_lazin.hw_04_08_24.domain.Laptop;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 public class LaptopDaoImpl implements LaptopDao {
-    private final String URL = "jdbc:mysql://localhost:3306/laptop_registry";
-    private final String USERNAME = "root";
-    private final String PASSWORD = "123";
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private Connection connection;
+    private final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("vlazin-jpa");
 
-    public LaptopDaoImpl() {
+    @Override
+    public void save(Laptop laptop) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(laptop);
+        transaction.commit();
+        entityManager.close();
     }
 
-    private Connection getConnection() throws SQLException {
-        if (connection == null) {
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        }
-        return connection;
-    }
-
-    public void addLaptop(Laptop laptop) {
-        String sqlQuery = "INSERT INTO laptops (model, manufacturer, prod_date, ram_capacity, ssd_capacity, cpu_name) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection connection = getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
-            statement.setString(1, laptop.getModel());
-            statement.setString(2, laptop.getManufacturer());
-            statement.setString(3, laptop.getProdDate().format(FORMATTER));
-            statement.setInt(4, laptop.getRamCapacity());
-            statement.setInt(5, laptop.getSsdCapacity());
-            statement.setString(6, laptop.getCpu());
-            int isDone = statement.executeUpdate();
-            if (isDone > 0) {
-                System.out.println("New laptop was inserted successfully!");
-            }
-        } catch (SQLException e) {
-            System.out.println("Faild db connection");
-        }
-    }
-
-    public Laptop findLaptopById(int id) {
-        String sqlQuery = "SELECT * FROM laptops WHERE laptop_id = ?";
-        Laptop laptop = new Laptop();
-
-        try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                laptop.setId(resultSet.getInt(1));
-                laptop.setModel(resultSet.getString(2));
-                laptop.setManufacturer(resultSet.getString(3));
-                laptop.setProdDate(LocalDate.parse(resultSet.getString(4), FORMATTER));
-                laptop.setRamCapacity(resultSet.getInt(5));
-                laptop.setSsdCapacity(resultSet.getInt(6));
-                laptop.setCpu(resultSet.getString(7));
-            } else {
-                System.out.println("Resultset is empty");
-            }
-        } catch (SQLException e) {
-            System.out.println("Faild db connection");
-        }
+    @Override
+    public Laptop findById(int id) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        Laptop laptop = entityManager.find(Laptop.class, id);
+        transaction.commit();
+        entityManager.close();
 
         return laptop;
     }
 
-    public List<Laptop> findAllLaptops() {
-        String sqlQuery = "SELECT * FROM laptops";
-        List<Laptop> laptops = new ArrayList<>();
-
-        try (Connection connection = getConnection();
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(sqlQuery)) {
-
-            while (resultSet.next()) {
-                Laptop laptop = new Laptop();
-
-                laptop.setId(resultSet.getInt(1));
-                laptop.setModel(resultSet.getString(2));
-                laptop.setManufacturer(resultSet.getString(3));
-                laptop.setProdDate(LocalDate.parse(resultSet.getString(4), FORMATTER));
-                laptop.setRamCapacity(resultSet.getInt(5));
-                laptop.setSsdCapacity(resultSet.getInt(6));
-                laptop.setCpu(resultSet.getString(7));
-
-                laptops.add(laptop);
-            }
-        } catch (SQLException e) {
-            System.out.println("Faild db connection");
-        }
-        return laptops;
-    }
-
-    public void deletLaptopbyId(int id) {
-        String sqlQuery = "DELETE FROM laptops WHERE laptop_id = ?";
-
-        try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println("Faild db connection");
-        }
-    }
-
-    public void deleteAllLaptops() {
-        String sqlQuery = "DELETE FROM laptops";
-
-        try (Connection connection = getConnection();
-                Statement statement = connection.createStatement()) {
-            statement.executeUpdate(sqlQuery);
-
-        } catch (SQLException e) {
-            System.out.println("Faild db connection");
-        }
-    }
-
-    public void updateLaptopById(int id, Laptop laptop) {
-        String sqlQuery = "UPDATE laptops SET model = ?, manufacturer = ?, prod_date = ?, ram_capacity = ?," +
-                "ssd_capacity = ?, cpu_name = ? WHERE laptop_id = ?";
-
-        try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            preparedStatement.setString(1, laptop.getModel());
-            preparedStatement.setString(2, laptop.getManufacturer());
-            preparedStatement.setString(3, laptop.getProdDate().format(FORMATTER));
-            preparedStatement.setInt(4, laptop.getRamCapacity());
-            preparedStatement.setInt(5, laptop.getSsdCapacity());
-            preparedStatement.setString(6, laptop.getCpu());
-            preparedStatement.setInt(7, id);
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println("Faild db connection");
-        }
-    }
-
-    public List<Laptop> findLaptopByModel(String model) {
-        String sqlQuery = "SELECT * FROM laptops WHERE model = ?";
-        List<Laptop> laptops = new ArrayList<>();
-
-        try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            preparedStatement.setString(1, model);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Laptop laptop = new Laptop();
-                laptop.setId(resultSet.getInt(1));
-                laptop.setModel(resultSet.getString(2));
-                laptop.setManufacturer(resultSet.getString(3));
-                laptop.setProdDate(LocalDate.parse(resultSet.getString(4), FORMATTER));
-                laptop.setRamCapacity(resultSet.getInt(5));
-                laptop.setSsdCapacity(resultSet.getInt(6));
-                laptop.setCpu(resultSet.getString(7));
-
-                laptops.add(laptop);
-            }
-        } catch (SQLException e) {
-            System.out.println("Faild db connection");
-        }
+    @Override
+    public List<Laptop> findAll() {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        TypedQuery<Laptop> query = entityManager.createQuery("FROM Laptop l", Laptop.class);
+        List<Laptop> laptops = query.getResultList();
+        transaction.commit();
+        entityManager.close();
 
         return laptops;
     }
 
-    public List<Laptop> findLaptopByProdDate(String prodDate) {
-        String sqlQuery = "SELECT * FROM laptops WHERE prod_date = ?";
-        List<Laptop> laptops = new ArrayList<>();
+    @Override
+    public void deleteById(int id) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        Query query = entityManager.createQuery("DELETE FROM Laptop l WHERE l.id =: lId");
+        query.setParameter("lId", id);
+        query.executeUpdate();
+        transaction.commit();
+        entityManager.close();
+    }
 
-        try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            preparedStatement.setString(1, prodDate);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Laptop laptop = new Laptop();
-                laptop.setId(resultSet.getInt(1));
-                laptop.setModel(resultSet.getString(2));
-                laptop.setManufacturer(resultSet.getString(3));
-                laptop.setProdDate(LocalDate.parse(resultSet.getString(4), FORMATTER));
-                laptop.setRamCapacity(resultSet.getInt(5));
-                laptop.setSsdCapacity(resultSet.getInt(6));
-                laptop.setCpu(resultSet.getString(7));
+    @Override
+    public void deleteAll() {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        Query query = entityManager.createQuery("DELETE FROM Laptop l");
+        query.executeUpdate();
+        transaction.commit();
+        entityManager.close();
+    }
 
-                laptops.add(laptop);
-            }
-        } catch (SQLException e) {
-            System.out.println("Faild db connection");
-        }
+    @Override
+    public void update(int id, Laptop laptop) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        laptop.setId(id);
+        transaction.begin();
+        
+        Laptop newLaptop = entityManager.merge(laptop);
+        entityManager.persist(newLaptop);
+        transaction.commit();
+        entityManager.close();
+    }
 
+    @Override
+    public List<Laptop> findByModel(String model) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        TypedQuery<Laptop> typedQuery = entityManager.createQuery("FROM Laptop l WHERE l.model =: lModel", Laptop.class);
+        typedQuery.setParameter("lModel", model);
+        List<Laptop> laptops = typedQuery.getResultList();
+        transaction.commit();
+        entityManager.close();
         return laptops;
     }
 
-    public List<Laptop> findLaptopByRamAnadSsd(int ram, int ssd) {
-        String sqlQuery = "SELECT * FROM laptops WHERE ram_capacity = ? AND ssd_capacity = ?";
-        List<Laptop> laptops = new ArrayList<>();
-
-        try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            preparedStatement.setInt(1, ram);
-            preparedStatement.setInt(2, ssd);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Laptop laptop = new Laptop();
-                laptop.setId(resultSet.getInt(1));
-                laptop.setModel(resultSet.getString(2));
-                laptop.setManufacturer(resultSet.getString(3));
-                laptop.setProdDate(LocalDate.parse(resultSet.getString(4), FORMATTER));
-                laptop.setRamCapacity(resultSet.getInt(5));
-                laptop.setSsdCapacity(resultSet.getInt(6));
-                laptop.setCpu(resultSet.getString(7));
-
-                laptops.add(laptop);
-            }
-        } catch (SQLException e) {
-            System.out.println("Faild db connection");
-        }
-
+    @Override
+    public List<Laptop> findByProdDate(LocalDate prodDate) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        TypedQuery<Laptop> typedQuery = entityManager.createQuery("FROM Laptop l WHERE l.prodDate =: lPd", Laptop.class);
+        typedQuery.setParameter("lPd", prodDate);
+        List<Laptop> laptops = typedQuery.getResultList();
+        transaction.commit();
+        entityManager.close();
         return laptops;
     }
 
-    public List<Laptop> findLaptopByCpu(String cpu) {
-        String sqlQuery = "SELECT * FROM laptops WHERE cpu_name = ?";
-        List<Laptop> laptops = new ArrayList<>();
+    @Override
+    public List<Laptop> findByRamAndSsd(int ram, int ssd) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        TypedQuery<Laptop> typedQuery = entityManager.createQuery("FROM Laptop l WHERE l.ramCapacity =: lRam", Laptop.class); 
+                // "AND l.ssdCapacity =: lSsd", Laptop.class);
+                
+        typedQuery.setParameter("lRam", ram);
+        // typedQuery.setParameter("lSsd", ssd);
 
-        try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            preparedStatement.setString(1, cpu);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Laptop laptop = new Laptop();
-                laptop.setId(resultSet.getInt(1));
-                laptop.setModel(resultSet.getString(2));
-                laptop.setManufacturer(resultSet.getString(3));
-                laptop.setProdDate(LocalDate.parse(resultSet.getString(4), FORMATTER));
-                laptop.setRamCapacity(resultSet.getInt(5));
-                laptop.setSsdCapacity(resultSet.getInt(6));
-                laptop.setCpu(resultSet.getString(7));
-
-                laptops.add(laptop);
-            }
-        } catch (SQLException e) {
-            System.out.println("Faild db connection");
-        }
-
+        List<Laptop> laptops = typedQuery.getResultList();
+        transaction.commit();
+        entityManager.close();
         return laptops;
     }
+
+    @Override
+    public List<Laptop> findByCpu(String cpu) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        TypedQuery<Laptop> typedQuery = entityManager.createQuery("FROM Laptop l WHERE l.cpuSpec =: lCpu", Laptop.class);
+        typedQuery.setParameter("lCpu", cpu);
+        List<Laptop> laptops = typedQuery.getResultList();
+        transaction.commit();
+        entityManager.close();
+        return laptops;
+    }
+
 }

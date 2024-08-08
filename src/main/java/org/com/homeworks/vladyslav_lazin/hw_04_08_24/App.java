@@ -1,24 +1,27 @@
-package homeworks.vladyslav_lazin.hw_2024.hw_02_06_24;
+package org.com.homeworks.vladyslav_lazin.hw_04_08_24;
 
-import homeworks.vladyslav_lazin.hw_2024.hw_02_06_24.dao.impl.LaptopDaoImpl;
+import org.com.homeworks.vladyslav_lazin.hw_04_08_24.domain.Laptop;
+import org.com.homeworks.vladyslav_lazin.hw_04_08_24.service.LaptopService;
+import org.com.homeworks.vladyslav_lazin.hw_04_08_24.service.impl.LaptopServiceImpl;
+
+import java.time.LocalDate;
 
 public class App {
     public static void main(String[] args) {
-        LaptopDaoImpl laptopDAO = new LaptopDaoImpl();
-        //  laptopDAO.addLaptop(
-        //  new Laptop("ThinkPad", "Lenovo", LocalDate.of(2021, 8, 21), 32, 512, "Inetl Core I7"));
-        // // System.out.println(laptopDAO.findLaptopById(2));
+        LaptopService laptopService = new LaptopServiceImpl();
 
-        // laptopDAO.findAllLaptops().forEach(System.out::println);
+        // Laptop laptop = Laptop
+        //         .builder()
+        //         .model("Vostro")
+        //         .manufacturer("Dell")
+        //         .prodDate(LocalDate.of(2021, 6, 30))
+        //         .ramCapacity(16)
+        //         .ssdCapacity(512)
+        //         .cpu("Intel Core i5").build();
+        // laptopService.save(laptop);
 
-        // laptopDAO.deletLaptopbyId(3);
-
-        // laptopDAO.deleteAllLaptops();
-        // laptopDAO.updateLaptopById(4, new Laptop("ThinkPad", "Lenovo", LocalDate.of(2021, 8, 21), 32, 512, "Inetl Core I7"));
-        // laptopDAO.findLaptopByModel("ThinkPad").forEach(System.out::println);
-        // laptopDAO.findLaptopByProdDate("2021-08-21").forEach(System.out::println);
-        // laptopDAO.findLaptopByRamAnadSsd(32, 512).forEach(System.out::println);
-        laptopDAO.findLaptopByCpu("Inetl Core I7").forEach(System.out::println);
-
+        // System.out.println(laptopService.findByRamAndSsd(32, 1024));
+        // System.out.println(laptopService.findByModel("Vostro"));
+        System.out.println(laptopService.findByCpu("AMD Ryzen 7"));
     }
 }
