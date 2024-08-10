@@ -64,4 +64,14 @@ public class LaptopServiceImpl implements LaptopService {
     public List<Laptop> findByCpu(String cpu) {
         return laptopDao.findByCpu(cpu);
     }
+
+    @Override
+    public void deleteByRamAndSsd(int ram, int ssd) {
+       laptopDao.deleteByRamAndSsd(ram, ssd);
+    }
+
+    @Override
+    public void deleteByCpu(String cpu) {
+        laptopDao.deleteByCpu(cpu);
+    }
 }

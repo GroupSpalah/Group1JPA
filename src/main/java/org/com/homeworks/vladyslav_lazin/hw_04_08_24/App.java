@@ -21,7 +21,8 @@ public class App {
         // laptopService.save(laptop);
 
         // System.out.println(laptopService.findAll());
-        System.out.println(laptopService.findByRamAndSsd(4, 120));
+        // System.out.println(laptopService.findByRamAndSsd(4, 120));
+        laptopService.deleteByRamAndSsd(4, 120);
         // System.out.println(laptopService.findByModel("ThinkPad"));
         // System.out.println(laptopService.findById(4));
         // System.out.println(laptopService.findByCpu("Inetl Core I7"));

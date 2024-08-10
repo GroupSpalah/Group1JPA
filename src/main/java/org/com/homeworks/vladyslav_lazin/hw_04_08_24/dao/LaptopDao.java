@@ -17,6 +17,10 @@ public interface LaptopDao {
 
     void deleteAll();
 
+    void deleteByRamAndSsd(int ram, int ssd);
+
+    void deleteByCpu(String cpu);
+
     void update(int id, Laptop laptop);
 
     List<Laptop> findByModel(String model);

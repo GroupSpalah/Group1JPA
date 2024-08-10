@@ -142,4 +142,29 @@ public class LaptopDaoImpl implements LaptopDao {
         return laptops;
     }
 
+    @Override
+    public void deleteByRamAndSsd(int ram, int ssd) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        Query query = entityManager.createQuery("DELETE FROM Laptop l WHERE l.ramCapacity = :lRam AND l.ssdCapacity = :lSsd");
+        query.setParameter("lRam", ram);
+        query.setParameter("lSsd", ssd);
+        query.executeUpdate();
+        transaction.commit();
+        entityManager.close();
+    }
+
+    @Override
+    public void deleteByCpu(String cpu) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        Query query = entityManager.createQuery("DELETE FROM Laptop l WHERE l.cpuName = :lCpu");
+        query.setParameter("lCpu", cpu);
+        query.executeUpdate();
+        transaction.commit();
+        entityManager.close();
+    }
+
 }
