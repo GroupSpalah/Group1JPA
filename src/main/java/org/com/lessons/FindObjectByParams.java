@@ -30,8 +30,4 @@ class FindObjectByParams {
     }
 }
 
-/**
- * 1 2 3 4
- *
- *
- */
+

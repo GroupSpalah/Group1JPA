@@ -13,7 +13,8 @@ public class ServicePersonJPA {
                 .build();
 
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("test-jpa");
+        EntityManagerFactory factory = Persistence.
+                createEntityManagerFactory("test-serega");
 
         @Cleanup
         EntityManager em = factory.createEntityManager();

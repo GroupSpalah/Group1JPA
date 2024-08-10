@@ -5,7 +5,6 @@
 
     <persistence-unit name="test-jpa">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
         <properties>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
             <property name="hibernate.connection.password" value="Suntour123"/>
@@ -17,6 +16,7 @@
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
+
 
     <persistence-unit name="test-serega">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
@@ -32,7 +32,23 @@
         </properties>
     </persistence-unit>
 
-    <persistence-unit name="test-dmytro">
+    <persistence-unit name="test-laptopJPA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.connection.password" value="12345"/>
+            <property name="hibernate.connection.url"
+                      value="jdbc:mysql://localhost:3306/laptop_JPA?serverTimezone=Europe/Kiev"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+
+
+
+    <persistence-unit name="test-person">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
