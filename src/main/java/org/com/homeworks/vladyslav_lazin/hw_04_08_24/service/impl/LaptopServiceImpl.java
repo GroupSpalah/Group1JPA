@@ -57,7 +57,7 @@ public class LaptopServiceImpl implements LaptopService {
 
     @Override
     public List<Laptop> findByRamAndSsd(int ram, int ssd) {
-        return findByRamAndSsd(ram, ssd);
+        return laptopDao.findByRamAndSsd(ram, ssd);
     }
 
     @Override

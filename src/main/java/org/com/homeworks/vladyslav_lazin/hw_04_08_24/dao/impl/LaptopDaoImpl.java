@@ -13,7 +13,7 @@ import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 public class LaptopDaoImpl implements LaptopDao {
-    private final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("vlazin-jpa");
+    private final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("jpa-laptops");
 
     @Override
     public void save(Laptop laptop) {
@@ -91,7 +91,7 @@ public class LaptopDaoImpl implements LaptopDao {
         EntityManager entityManager = FACTORY.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        TypedQuery<Laptop> typedQuery = entityManager.createQuery("FROM Laptop l WHERE l.model =: lModel", Laptop.class);
+        TypedQuery<Laptop> typedQuery = entityManager.createQuery("FROM Laptop l WHERE l.model LIKE :lModel", Laptop.class);
         typedQuery.setParameter("lModel", model);
         List<Laptop> laptops = typedQuery.getResultList();
         transaction.commit();
@@ -117,11 +117,11 @@ public class LaptopDaoImpl implements LaptopDao {
         EntityManager entityManager = FACTORY.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        TypedQuery<Laptop> typedQuery = entityManager.createQuery("FROM Laptop l WHERE l.ramCapacity =: lRam", Laptop.class); 
-                // "AND l.ssdCapacity =: lSsd", Laptop.class);
+        TypedQuery<Laptop> typedQuery = entityManager.createQuery("FROM Laptop l WHERE l.ramCapacity = :lRam" +
+                " AND l.ssdCapacity =: lSsd", Laptop.class);
                 
         typedQuery.setParameter("lRam", ram);
-        // typedQuery.setParameter("lSsd", ssd);
+        typedQuery.setParameter("lSsd", ssd);
 
         List<Laptop> laptops = typedQuery.getResultList();
         transaction.commit();
@@ -133,9 +133,9 @@ public class LaptopDaoImpl implements LaptopDao {
     public List<Laptop> findByCpu(String cpu) {
         EntityManager entityManager = FACTORY.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
+        TypedQuery<Laptop> typedQuery = entityManager.createQuery("FROM Laptop l WHERE l.cpuName =: cpu", Laptop.class);
+        typedQuery.setParameter("cpu", cpu);
         transaction.begin();
-        TypedQuery<Laptop> typedQuery = entityManager.createQuery("FROM Laptop l WHERE l.cpuSpec =: lCpu", Laptop.class);
-        typedQuery.setParameter("lCpu", cpu);
         List<Laptop> laptops = typedQuery.getResultList();
         transaction.commit();
         entityManager.close();

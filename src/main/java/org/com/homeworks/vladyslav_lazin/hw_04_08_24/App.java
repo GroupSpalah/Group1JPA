@@ -20,8 +20,10 @@ public class App {
         //         .cpu("Intel Core i5").build();
         // laptopService.save(laptop);
 
-        // System.out.println(laptopService.findByRamAndSsd(32, 1024));
-        // System.out.println(laptopService.findByModel("Vostro"));
-        System.out.println(laptopService.findByCpu("AMD Ryzen 7"));
+        // System.out.println(laptopService.findAll());
+        System.out.println(laptopService.findByRamAndSsd(4, 120));
+        // System.out.println(laptopService.findByModel("ThinkPad"));
+        // System.out.println(laptopService.findById(4));
+        // System.out.println(laptopService.findByCpu("Inetl Core I7"));
     }
 }

@@ -46,8 +46,8 @@ public class Laptop {
     @Column(name = "ssd_capacity")
     int ssdCapacity;
     
-    @Column(name = "cpu_cpec")
-    String cpuSpec;
+    @Column(name = "cpu_name")
+    String cpuName;
 
 
 }
