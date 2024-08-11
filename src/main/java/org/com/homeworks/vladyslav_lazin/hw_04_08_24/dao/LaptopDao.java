@@ -6,7 +6,12 @@ import java.time.LocalDate;
 
 import org.com.homeworks.vladyslav_lazin.hw_04_08_24.domain.Laptop;
 
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
 public interface LaptopDao {
+    final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("jpa-laptops");
+
     void save(Laptop laptop);
 
     Laptop findById(int id);

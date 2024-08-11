@@ -6,14 +6,11 @@ import java.time.LocalDate;
 import org.com.homeworks.vladyslav_lazin.hw_04_08_24.dao.LaptopDao;
 import org.com.homeworks.vladyslav_lazin.hw_04_08_24.domain.Laptop;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 public class LaptopDaoImpl implements LaptopDao {
-    private final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("jpa-laptops");
 
     @Override
     public void save(Laptop laptop) {
