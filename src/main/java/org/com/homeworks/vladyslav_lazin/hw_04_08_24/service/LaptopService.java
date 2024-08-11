@@ -21,7 +21,7 @@ public interface LaptopService {
 
     void deleteByCpu(String cpu);
 
-    void update(int id, Laptop laptop);
+    void update(Laptop laptop);
 
     List<Laptop> findByModel(String model);
 

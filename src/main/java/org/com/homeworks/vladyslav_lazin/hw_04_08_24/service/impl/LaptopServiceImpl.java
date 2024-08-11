@@ -42,8 +42,8 @@ public class LaptopServiceImpl implements LaptopService {
     }
 
     @Override
-    public void update(int id, Laptop laptop) {
-        laptopDao.update(id, laptop);
+    public void update(Laptop laptop) {
+        laptopDao.update(laptop);
     }
 
     @Override

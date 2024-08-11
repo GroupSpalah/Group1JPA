@@ -71,10 +71,9 @@ public class LaptopDaoImpl implements LaptopDao {
     }
 
     @Override
-    public void update(int id, Laptop laptop) {
+    public void update(Laptop laptop) {
         EntityManager entityManager = FACTORY.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
-        laptop.setId(id);
         transaction.begin();
         
         Laptop newLaptop = entityManager.merge(laptop);
