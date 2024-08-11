@@ -21,7 +21,9 @@ public class Requests {
 
     public static String DELETE_ALL = "DELETE FROM LaptopJPA";
 
-    public static String UPDATE = "UPDATE LaptopJPA l SET l.model = :model, l.manufacturer = :manufacturer, l.releaseDate = :releaseDate, l.ramSize = :ramSize, l.ssdCapacity = :ssdCapacity WHERE l.id = int_id";
+    public static String UPDATE =
+            "UPDATE LaptopJPA l SET l.model = :model, l.manufacturer = :manufacturer, l.releaseDate = :releaseDate, " +
+                    "l.ramSize = :ramSize, l.ssdCapacity = :ssdCapacity WHERE l.id = int_id";
 
     public static String GET_BY_MODEL = "FROM LaptopJPA l WHERE l.model =:string_model";
 

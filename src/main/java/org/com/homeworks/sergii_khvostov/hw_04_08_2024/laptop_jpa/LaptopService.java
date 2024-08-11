@@ -9,6 +9,17 @@ public class LaptopService {
     public static void main(String[] args) {
         DAOLaptop dl = new DAOLaptop();
 
+        LaptopJPA laptopJPA = LaptopJPA
+                .builder()
+                .model("TUF15")
+//                .id(102)
+                .manufacturer("ASUS")
+                .ramSize(32)
+                .releaseDate(LocalDate.of(2021,12, 05))
+                .ssdCapacity(1024)
+                .processor("INTEL CORE I7")
+                .build();
+
         /*LaptopJPA laptopJPA = LaptopJPA
                 .builder()
                 .model("TUF15")

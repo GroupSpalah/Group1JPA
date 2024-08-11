@@ -10,8 +10,6 @@ import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domen.LaptopJP
 import java.time.LocalDate;
 import java.util.List;
 
-@NoArgsConstructor
-
 public class DAOLaptop implements DAO<LaptopJPA> {
 
     @Override
@@ -121,7 +119,7 @@ public class DAOLaptop implements DAO<LaptopJPA> {
     }
 
     @Override
-    public void update(int id, LaptopJPA entity) {
+    public void update(int id, LaptopJPA entity) {//entity id = 0, id
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
 
@@ -140,7 +138,7 @@ public class DAOLaptop implements DAO<LaptopJPA> {
         query.setParameter("ramSize", entity.getRamSize());
         query.setParameter("ssdCapacity", entity.getSsdCapacity());
 
-        query.setParameter(Requests.SET_ID, id);
+        query.setParameter(Requests.SET_ID, entity.getId());
 
         query.executeUpdate();
 

@@ -125,12 +125,15 @@ public class LaptopDaoImpl implements LaptopDao {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
         @Cleanup
         EntityManager em = factory.createEntityManager();
+
         EntityTransaction transaction = em.getTransaction();
+
         transaction.begin();
 
         TypedQuery<Laptop> query = em.createQuery(inputQuery, Laptop.class);
         query.setParameter(firstParam, firstValue);
         query.setParameter(secondParam, secondValue);
+
         List<Laptop> laptopList = query.getResultList();
         System.out.println(laptopList);
         transaction.commit();

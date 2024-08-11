@@ -52,6 +52,11 @@ class TestJpa {
         transaction.begin();
 
         em.persist(ukraine);
+       /* em.persist(ukraine);
+        em.persist(ukraine);
+        em.persist(ukraine);*/
+
+        ukraine.setRegion(Region.ODESSA);
 
         transaction.commit();
 
