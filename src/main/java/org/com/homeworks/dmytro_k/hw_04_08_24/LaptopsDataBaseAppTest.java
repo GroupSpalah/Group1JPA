@@ -46,19 +46,19 @@ public class LaptopsDataBaseAppTest {
 
         //laptopDao.addLaptop(newLenovo);
 
-        System.out.println(laptopDao.findById(1));
+        //System.out.println(laptopDao.findById(1));
 
         //получить все записи
-        laptopDao.printAllLaptop();
+        //laptopDao.printAllLaptop();
 
         //получить записи по модели
-        laptopDao.filterByModel(MODEL, "Yoga Slim 7");
+        //laptopDao.filterByModel(MODEL, "Yoga Slim 7");
 
         //получить записи по дате выпуска
-        laptopDao.filterByReleaseDate(LocalDate.of(2024, 1, 25));
+        laptopDao.filterByReleaseDate(LocalDate.of(2022, 1, 25));
 
         //получить записи по RAMCapacity и SSDCapacity
-        laptopDao.filterByTwoParam(FILTER_BY_RAM_AND_SSD, RAM_CAPACITY, SSD_CAPACITY, 16, 512);
+/*        laptopDao.filterByTwoParam(FILTER_BY_RAM_AND_SSD, RAM_CAPACITY, SSD_CAPACITY, 16, 512);
 
         //получить записи по processor
         laptopDao.filerByProcessor(PROCESSOR, "%intel%");
@@ -67,6 +67,6 @@ public class LaptopsDataBaseAppTest {
         laptopDao.deleteByProcessor("%Intel Core i9-1485G9%");
 
         //удалить записи по RAM and SSD
-        laptopDao.deleteByRamAndSsd(1, 16);
+        laptopDao.deleteByRamAndSsd(1, 16);*/
     }
 }
