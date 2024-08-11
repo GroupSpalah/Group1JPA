@@ -2,6 +2,8 @@ package org.com.homeworks.dmytro_k.hw_04_08_24.dao;
 
 import org.com.homeworks.dmytro_k.hw_04_08_24.domain.Laptop;
 
+import java.time.LocalDate;
+
 public interface LaptopDao {
     void addLaptop(Laptop laptop);
 
@@ -9,7 +11,7 @@ public interface LaptopDao {
 
     void printAllLaptop();
 
-    void filterByReleaseDate();
+    void filterByReleaseDate(LocalDate date);
 
     void filterByTwoParam(String inputQuery, String firstParam, String secondParam,
                           int firstValue, int secondValue);

@@ -44,7 +44,7 @@ public class LaptopsDataBaseAppTest {
 
         LaptopDao laptopDao = new LaptopDaoImpl();
 
-        laptopDao.addLaptop(newLenovo);
+        //laptopDao.addLaptop(newLenovo);
 
         System.out.println(laptopDao.findById(1));
 
@@ -55,7 +55,7 @@ public class LaptopsDataBaseAppTest {
         laptopDao.filterByModel(MODEL, "Yoga Slim 7");
 
         //получить записи по дате выпуска
-        laptopDao.filterByReleaseDate();
+        laptopDao.filterByReleaseDate(LocalDate.of(2024, 1, 25));
 
         //получить записи по RAMCapacity и SSDCapacity
         laptopDao.filterByTwoParam(FILTER_BY_RAM_AND_SSD, RAM_CAPACITY, SSD_CAPACITY, 16, 512);

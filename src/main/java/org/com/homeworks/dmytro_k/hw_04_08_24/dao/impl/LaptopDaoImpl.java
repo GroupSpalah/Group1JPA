@@ -103,7 +103,7 @@ public class LaptopDaoImpl implements LaptopDao {
         transaction.commit();
     }
 
-    public void filterByReleaseDate() {
+    public void filterByReleaseDate(LocalDate date) {
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
         @Cleanup
@@ -113,7 +113,7 @@ public class LaptopDaoImpl implements LaptopDao {
 
         TypedQuery<Laptop> query = em.createQuery(FILTER_BY_RELEASE_DATE,
                 Laptop.class);
-        query.setParameter(RELEASE_DATE, LocalDate.of(2024, 1, 25));
+        query.setParameter(RELEASE_DATE, date);
         List<Laptop> laptopList = query.getResultList();
         System.out.println(laptopList);
         transaction.commit();
