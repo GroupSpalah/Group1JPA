@@ -3,7 +3,7 @@ package org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface DAO<T> {
+public interface DAOLaptop<T> {
 
     void add(T entity);
 
@@ -15,7 +15,7 @@ public interface DAO<T> {
 
     void deleteAll();
 
-    void update(int id, T entity);
+    void update(T entity);
 
     List<T> getByModel(String model);
 

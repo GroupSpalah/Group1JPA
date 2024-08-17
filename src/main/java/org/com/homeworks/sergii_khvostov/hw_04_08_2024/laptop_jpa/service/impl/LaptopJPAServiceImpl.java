@@ -2,9 +2,9 @@ package org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.service.impl;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.DAO;
-import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao_laptop.DAOLaptop;
-import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domen.LaptopJPA;
+import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.DAOLaptop;
+import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.impl.DAOLaptopImpl;
+import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domain.LaptopJPA;
 import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.service.LaptopJPAService;
 
 import java.time.LocalDate;
@@ -13,10 +13,10 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LaptopJPAServiceImpl implements LaptopJPAService {
 
-    DAO<LaptopJPA> daoLaptop;
+    DAOLaptop<LaptopJPA> daoLaptop;
 
     public LaptopJPAServiceImpl() {
-        daoLaptop = new DAOLaptop();
+        daoLaptop = new DAOLaptopImpl();
     }
 
     @Override
@@ -47,8 +47,8 @@ public class LaptopJPAServiceImpl implements LaptopJPAService {
     }
 
     @Override
-    public void updateLaptop(int id, LaptopJPA newLaptop) {
-        daoLaptop.update(id, newLaptop);
+    public void updateLaptop(LaptopJPA newLaptop) {
+        daoLaptop.update(newLaptop);
 
     }
 

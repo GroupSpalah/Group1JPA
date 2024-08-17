@@ -1,16 +1,15 @@
-package org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao_laptop;
+package org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.impl;
 
 import jakarta.persistence.*;
 import lombok.Cleanup;
-import lombok.NoArgsConstructor;
-import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.DAO;
+import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.DAOLaptop;
 import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.db_connection.Requests;
-import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domen.LaptopJPA;
+import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domain.LaptopJPA;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class DAOLaptop implements DAO<LaptopJPA> {
+public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
 
     @Override
     public void add(LaptopJPA entity) {
@@ -119,7 +118,7 @@ public class DAOLaptop implements DAO<LaptopJPA> {
     }
 
     @Override
-    public void update(int id, LaptopJPA entity) {//entity id = 0, id
+    public void update(LaptopJPA entity) {//entity id = 0, id
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
 

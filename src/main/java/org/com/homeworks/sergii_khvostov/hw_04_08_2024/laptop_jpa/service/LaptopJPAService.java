@@ -1,6 +1,6 @@
 package org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.service;
 
-import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domen.LaptopJPA;
+import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domain.LaptopJPA;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +17,7 @@ public interface LaptopJPAService {
 
     void deleteAllLaptops();
 
-    void updateLaptop(int id, LaptopJPA newLaptop);
+    void updateLaptop(LaptopJPA newLaptop);
 
     List<LaptopJPA> getLaptopByModel(String model);
 

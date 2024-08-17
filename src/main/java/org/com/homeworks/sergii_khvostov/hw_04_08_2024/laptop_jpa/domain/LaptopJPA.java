@@ -1,4 +1,4 @@
-package org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domen;
+package org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
