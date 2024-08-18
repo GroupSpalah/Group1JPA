@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @ToString
 @Builder
-
 public class LaptopJPA {
 
     @Id
