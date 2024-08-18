@@ -10,19 +10,23 @@ public class App {
     public static void main(String[] args) {
         LaptopService laptopService = new LaptopServiceImpl();
 
-        Laptop laptop = Laptop
-                .builder()
-                .model("Vostro")
-                .manufacturer("Dell")
-                .prodDate(LocalDate.of(2021, 6, 30))
-                .ramCapacity(16)
-                .ssdCapacity(512)
-                .cpuName("Intel Core i5").build();
-        laptopService.save(laptop);
+        // Laptop laptop = Laptop
+        //         .builder()
+        //         .model("Vostro")
+        //         .manufacturer("Dell")
+        //         .prodDate(LocalDate.of(2021, 6, 30))
+        //         .ramCapacity(16)
+        //         .ssdCapacity(512)
+        //         .cpuName("Intel Core i5").build();
+        // laptopService.save(laptop);
+        
+        Laptop laptop2 = laptopService.findById(1);
+        laptop2.setRamCapacity(16);
+        laptopService.update(laptop2);
 
         // System.out.println(laptopService.findAll());
         // System.out.println(laptopService.findByRamAndSsd(4, 120));
-        laptopService.deleteByRamAndSsd(4, 120);
+        // laptopService.deleteByRamAndSsd(4, 120);
         // System.out.println(laptopService.findByModel("ThinkPad"));
         // System.out.println(laptopService.findById(4));
         // System.out.println(laptopService.findByCpu("Inetl Core I7"));

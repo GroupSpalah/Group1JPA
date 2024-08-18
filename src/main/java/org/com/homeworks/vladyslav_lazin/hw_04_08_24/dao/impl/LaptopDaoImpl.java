@@ -30,6 +30,10 @@ public class LaptopDaoImpl implements LaptopDao {
         Laptop laptop = entityManager.find(Laptop.class, id);
         transaction.commit();
         entityManager.close();
+        if (laptop == null) {
+            throw new RuntimeException("Laptop with id " + id + " not found");
+            
+        }
 
         return laptop;
     }
