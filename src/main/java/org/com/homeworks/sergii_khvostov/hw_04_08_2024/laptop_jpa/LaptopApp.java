@@ -22,6 +22,5 @@ public class LaptopApp {
 
         // ljsi.addLaptop(laptopJPA);
 
-        ljsi.updateLaptop(laptopJPA);
     }
 }
