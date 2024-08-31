@@ -2,8 +2,8 @@ package org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.service.impl;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.DAOLaptop;
-import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.impl.DAOLaptopImpl;
+import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.LaptopDAO;
+import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.impl.LaptopDAOImpl;
 import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domain.LaptopJPA;
 import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.service.LaptopJPAService;
 
@@ -13,10 +13,10 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LaptopJPAServiceImpl implements LaptopJPAService {
 
-    DAOLaptop<LaptopJPA> daoLaptop;
+    LaptopDAO<LaptopJPA> daoLaptop;
 
     public LaptopJPAServiceImpl() {
-        daoLaptop = new DAOLaptopImpl();
+        daoLaptop = new LaptopDAOImpl();
     }
 
     @Override

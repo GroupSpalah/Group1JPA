@@ -2,22 +2,25 @@ package org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.impl;
 
 import jakarta.persistence.*;
 import lombok.Cleanup;
-import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.DAOLaptop;
+import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.LaptopDAO;
 import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.db_connection.Requests;
 import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domain.LaptopJPA;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
+public class LaptopDAOImpl implements LaptopDAO<LaptopJPA> {
+
+    private EntityManager createEntityManager() {
+        @Cleanup
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
+        return factory.createEntityManager();
+    }
 
     @Override
     public void add(LaptopJPA entity) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
@@ -31,10 +34,7 @@ public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
     @Override
     public LaptopJPA getById(int id) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
@@ -56,10 +56,7 @@ public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
     @Override
     public List<LaptopJPA> getAll() {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
@@ -79,10 +76,7 @@ public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
     @Override
     public void deleteById(int id) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
@@ -100,10 +94,7 @@ public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
     @Override
     public void deleteAll() {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
@@ -118,18 +109,19 @@ public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
     }
 
     @Override
-    public void update(LaptopJPA entity) {//entity id = 0, id
+    public void update(LaptopJPA entity) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
         transaction.begin();
 
-        Query query = em.createQuery(Requests.UPDATE);
+        LaptopJPA laptop = em.merge(entity);
+
+        em.persist(laptop);
+
+        /*Query query = em.createQuery(Requests.UPDATE);
 
         query.setParameter("model", entity.getModel());
         query.setParameter("manufacturer", entity.getManufacturer());
@@ -139,19 +131,15 @@ public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
 
         query.setParameter(Requests.SET_ID, entity.getId());
 
-        query.executeUpdate();
+        query.executeUpdate();*/
 
         transaction.commit();
-
     }
 
     @Override
     public List<LaptopJPA> getByModel(String model) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
@@ -174,10 +162,7 @@ public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
     @Override
     public List<LaptopJPA> getByReleaseDate(LocalDate releaseDate) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
@@ -199,10 +184,7 @@ public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
     @Override
     public List<LaptopJPA> getByRAMAndSSD(int ramSize, int ssdCapacity) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
@@ -225,10 +207,7 @@ public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
     @Override
     public List<LaptopJPA> getByProcessor(String processor) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
@@ -250,10 +229,7 @@ public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
     @Override
     public void deleteByProcessor(String processor) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
@@ -271,10 +247,7 @@ public class DAOLaptopImpl implements DAOLaptop<LaptopJPA> {
     @Override
     public void deleteByRAMAndSSD(int ramSize, int ssdCapacity) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(Requests.FACTORY_NAME);
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 

@@ -1,12 +1,11 @@
 package org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa;
 
-import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao.impl.DAOLaptopImpl;
 import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.domain.LaptopJPA;
 import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.service.impl.LaptopJPAServiceImpl;
 
 import java.time.LocalDate;
 
-public class LaptopService {
+public class LaptopApp {
     public static void main(String[] args) {
         LaptopJPAServiceImpl ljsi = new LaptopJPAServiceImpl();
 
