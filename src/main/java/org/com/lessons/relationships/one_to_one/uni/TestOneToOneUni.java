@@ -5,10 +5,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import lombok.Cleanup;
-import org.com.lessons.Country;
-import org.com.lessons.Region;
-
-import java.time.LocalDate;
 
 class TestOneToOneUni {
     public static void main(String[] args) {
@@ -19,7 +15,7 @@ class TestOneToOneUni {
         @Cleanup
         EntityManager em = factory.createEntityManager();
 
-        Phone phone = Phone
+        PhoneU phoneU = PhoneU
                 .builder()
                 .number("067")
                 .build();
@@ -27,7 +23,7 @@ class TestOneToOneUni {
         Man john = Man
                 .builder()
                 .age(32)
-                .phone(phone)
+                .phoneU(phoneU)
                 .name("John")
                 .build();
 

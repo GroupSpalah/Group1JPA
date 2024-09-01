@@ -40,6 +40,8 @@ import jakarta.persistence.*;
 import lombok.Cleanup;
 import org.com.homeworks.dmytro_k.hw_04_08_24.dao.LaptopDao;
 import org.com.homeworks.dmytro_k.hw_04_08_24.domain.Laptop;
+import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.db_connection.Requests;
+import org.com.lessons.Country;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -47,6 +49,7 @@ import java.util.List;
 import static org.com.homeworks.dmytro_k.hw_04_08_24.util.ConstantsUtil.*;
 
 public class LaptopDaoImpl implements LaptopDao {
+
 
     public void addLaptop(Laptop laptop) {
         @Cleanup
@@ -175,6 +178,29 @@ public class LaptopDaoImpl implements LaptopDao {
         query.setParameter(SSD_CAPACITY, secondParam);
         int deletedRows = query.executeUpdate();
         System.out.println("Rows deleted: " + deletedRows);
+
+        transaction.commit();
+    }
+
+    public void update(Laptop laptop) {
+        @Cleanup
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
+        @Cleanup
+        EntityManager em = factory.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+
+        Query query = em.createQuery(UPDATE);
+
+        query.setParameter(MODEL, laptop.getModel());
+        query.setParameter(MANUFACTURER, laptop.getManufacturer());
+        query.setParameter(RELEASE_DATE, laptop.getReleaseDate());
+        query.setParameter(RAM_CAPACITY, laptop.getRAMCapacity());
+        query.setParameter(SSD_CAPACITY, laptop.getSSDCapacity());
+        query.setParameter(PROCESSOR, laptop.getProcessor());
+        query.setParameter(LAPTOP_ID, laptop.getId());
+
+        query.executeUpdate();
 
         transaction.commit();
     }

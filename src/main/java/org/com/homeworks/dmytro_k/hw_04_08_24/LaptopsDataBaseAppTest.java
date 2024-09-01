@@ -3,6 +3,9 @@ package org.com.homeworks.dmytro_k.hw_04_08_24;
 import org.com.homeworks.dmytro_k.hw_04_08_24.dao.LaptopDao;
 import org.com.homeworks.dmytro_k.hw_04_08_24.dao.impl.LaptopDaoImpl;
 import org.com.homeworks.dmytro_k.hw_04_08_24.domain.Laptop;
+import org.com.homeworks.dmytro_k.hw_04_08_24.service.LaptopService;
+import org.com.homeworks.dmytro_k.hw_04_08_24.service.impl.LaptopServiceImpl;
+
 import java.time.LocalDate;
 
 import static org.com.homeworks.dmytro_k.hw_04_08_24.util.ConstantsUtil.*;
@@ -28,45 +31,53 @@ import static org.com.homeworks.dmytro_k.hw_04_08_24.util.ConstantsUtil.*;
  * 5. Розробіть контролер для обробки запитів користувача.
  * 6. Продемонструйте розроблений проект у дії. Скористайтеся для надсилання запитів до сервера
  * API-клієнтом (Postman, Insomnia тощо). Формат тіла HTTP-запитів та відповідей сервера — JSON.
+ * <p>
+ * ++Додати сервісний слой !!!
+ * <p>
+ * ++1) Update Laptop in separate method
  */
 
 public class LaptopsDataBaseAppTest {
     public static void main(String[] args) {
 
         Laptop newLenovo = Laptop.builder()
-                .model("Yoga Slim 15")
+                .model("Yoga Slim 40")
                 .manufacturer("Lenovo")
                 .releaseDate(LocalDate.of(2024, 1, 25))
                 .RAMCapacity(32)
                 .SSDCapacity(2048)
                 .processor("Intel Core i9-1485G9")
+                //.id(30)
                 .build();
 
         LaptopDao laptopDao = new LaptopDaoImpl();
 
         //laptopDao.addLaptop(newLenovo);
 
-        //System.out.println(laptopDao.findById(1));
+        System.out.println(laptopDao.findById(1));
 
         //получить все записи
-        //laptopDao.printAllLaptop();
+        laptopDao.printAllLaptop();
 
         //получить записи по модели
-        //laptopDao.filterByModel(MODEL, "Yoga Slim 7");
+        laptopDao.filterByModel(MODEL, "Yoga Slim 7");
 
         //получить записи по дате выпуска
         laptopDao.filterByReleaseDate(LocalDate.of(2022, 1, 25));
 
         //получить записи по RAMCapacity и SSDCapacity
-/*        laptopDao.filterByTwoParam(FILTER_BY_RAM_AND_SSD, RAM_CAPACITY, SSD_CAPACITY, 16, 512);
+        laptopDao.filterByTwoParam(FILTER_BY_RAM_AND_SSD, RAM_CAPACITY, SSD_CAPACITY, 16, 512);
 
         //получить записи по processor
         laptopDao.filerByProcessor(PROCESSOR, "%intel%");
 
         //удалить записи по processor
-        laptopDao.deleteByProcessor("%Intel Core i9-1485G9%");
+        //laptopDao.deleteByProcessor("%Intel Core i9-1485G9%");
 
         //удалить записи по RAM and SSD
-        laptopDao.deleteByRamAndSsd(1, 16);*/
+        //laptopDao.deleteByRamAndSsd(1, 16);
+
+        LaptopService laptopService = new LaptopServiceImpl();
+        //laptopService.update(newLenovo);
     }
 }

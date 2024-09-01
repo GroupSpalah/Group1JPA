@@ -1,10 +1,11 @@
-package org.com.homeworks.dmytro_k.hw_04_08_24.dao;
+package org.com.homeworks.dmytro_k.hw_04_08_24.service;
 
 import org.com.homeworks.dmytro_k.hw_04_08_24.domain.Laptop;
 
 import java.time.LocalDate;
 
-public interface LaptopDao {
+public interface LaptopService {
+
     void addLaptop(Laptop laptop);
 
     Laptop findById(int id);

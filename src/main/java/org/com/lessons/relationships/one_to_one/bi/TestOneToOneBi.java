@@ -5,8 +5,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import lombok.Cleanup;
-import org.com.lessons.relationships.one_to_one.uni.Man;
-import org.com.lessons.relationships.one_to_one.uni.Phone;
 
 class TestOneToOneBi {
     public static void main(String[] args) {

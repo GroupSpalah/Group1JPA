@@ -1,4 +1,5 @@
-package org.com.lessons.relationships.one_to_one.uni;
+package org.com.homeworks.dmytro_k.hw_18_08_24.ad_board_common.domain;
+
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,19 +7,19 @@ import lombok.experimental.FieldDefaults;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+
 public class Phone {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "phone_id")
-    int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    long id;
 
-    String number;
-
-
+    @Column(name = "phone_number")
+    String phoneNumber;
 }

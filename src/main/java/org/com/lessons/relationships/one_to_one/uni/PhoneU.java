@@ -12,16 +12,13 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Man {
+public class PhoneU {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "man_id")
+    @Column(name = "phone_id")
     int id;
 
-    String name;
+    String number;
 
-    int age;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    PhoneU phoneU;
 }

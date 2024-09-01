@@ -48,7 +48,7 @@
 
 
 
-    <persistence-unit name="test-person">
+    <persistence-unit name="test-dmytro">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
