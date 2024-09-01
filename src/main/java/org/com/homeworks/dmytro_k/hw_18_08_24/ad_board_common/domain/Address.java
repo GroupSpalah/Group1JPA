@@ -10,8 +10,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "author_address")
-
+@ToString(exclude = "author")
 public class Address {
 
     @Id

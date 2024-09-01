@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 public class Author {
 
     @Id
@@ -32,9 +31,9 @@ public class Author {
     @JoinColumn(name = "FK_author_phone")
     List<Phone> phones;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}/*, mappedBy = "author_address"*/)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "author")
     Address address;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Email email;
 }

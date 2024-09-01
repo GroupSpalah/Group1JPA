@@ -1,0 +1,4 @@
+1) Отношение Ad -> Author организовать как ManyToOne
+2) Отношение Ad -> Rubric организовать как ManyToOne
+3) DAO(CRU) and Service
+
