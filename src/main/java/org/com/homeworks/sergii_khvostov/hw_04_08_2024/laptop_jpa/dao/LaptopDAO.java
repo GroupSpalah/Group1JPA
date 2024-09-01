@@ -3,7 +3,7 @@ package org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.dao;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface DAOLaptop<T> {
+public interface LaptopDAO<T> {
 
     void add(T entity);
 
