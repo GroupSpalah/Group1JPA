@@ -40,8 +40,6 @@ import jakarta.persistence.*;
 import lombok.Cleanup;
 import org.com.homeworks.dmytro_k.hw_04_08_24.dao.LaptopDao;
 import org.com.homeworks.dmytro_k.hw_04_08_24.domain.Laptop;
-import org.com.homeworks.sergii_khvostov.hw_04_08_2024.laptop_jpa.db_connection.Requests;
-import org.com.lessons.Country;
 
 import java.time.LocalDate;
 import java.util.List;
