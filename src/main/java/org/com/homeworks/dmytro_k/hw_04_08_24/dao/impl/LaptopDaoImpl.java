@@ -40,6 +40,7 @@ import jakarta.persistence.*;
 import lombok.Cleanup;
 import org.com.homeworks.dmytro_k.hw_04_08_24.dao.LaptopDao;
 import org.com.homeworks.dmytro_k.hw_04_08_24.domain.Laptop;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -180,7 +181,7 @@ public class LaptopDaoImpl implements LaptopDao {
         transaction.commit();
     }
 
-    public void update(Laptop laptop) {
+    public void update(@NotNull Laptop laptop) {
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
         @Cleanup
