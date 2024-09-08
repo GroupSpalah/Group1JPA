@@ -1,0 +1,2 @@
+1) DAO(CRUD) and Service for Ad, Author, Rubric
+2) Test(CRUD), not unit tests

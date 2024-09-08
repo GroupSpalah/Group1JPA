@@ -48,8 +48,8 @@ class TestManyToOne {
 }
 
 /**
- * 1) Saving Person
- * 2) Find Person by id
- * 3) Set person into ad
- * 4) Saving ad
+ * 1) Saving Person - service Person
+ * 2) Find Person by id - service Person
+ * 3) Set person into ad - psvm
+ * 4) Saving ad - service Ad
  */
