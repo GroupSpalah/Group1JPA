@@ -1,5 +1,4 @@
-package org.com.homeworks.dmytro_k.hw_18_08_24.ad_board_common.domain;
-
+package org.com.lessons.orphan_removal;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,18 +6,20 @@ import lombok.experimental.FieldDefaults;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Phone {
-
+public class OrParent {
     @Id
-    @Column(name = "phone_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    @Column(name = "parent_id")
+    int id;
 
-    @Column(name = "phone_number")
-    String phoneNumber;
+    String name;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    OrChild child;
 }

@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import lombok.Cleanup;
+import org.com.lessons.orphan_removal.OrChild;
+import org.com.lessons.orphan_removal.OrParent;
 import org.com.lessons.relationships.one_to_many.uni.Leaf;
 import org.com.lessons.relationships.one_to_many.uni.Tree;
 
@@ -39,8 +41,20 @@ class TestManyToOne {
                 .person(person)
                 .build();
 
-        em.persist(ad);
+//        em.persist(ad);
 
+        OrChild child = OrChild
+                .builder()
+                .age(10)
+                .build();
+
+        OrParent parent = OrParent
+                .builder()
+                .name("John")
+                .child(child)
+                .build();
+
+        em.persist(parent);
 
         transaction.commit();
 
