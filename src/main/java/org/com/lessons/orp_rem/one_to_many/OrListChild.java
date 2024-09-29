@@ -1,4 +1,4 @@
-package org.com.lessons.orphan_removal;
+package org.com.lessons.orp_rem.one_to_many;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,14 +12,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class OrParent {
+public class OrListChild {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "parent_id")
+    @Column(name = "orlc_id")
     int id;
 
-    String name;
-
-    @OneToOne(cascade = CascadeType.PERSIST)
-    OrChild child;
+    int age;
 }

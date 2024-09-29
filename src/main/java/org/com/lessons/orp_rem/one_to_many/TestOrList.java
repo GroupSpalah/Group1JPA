@@ -1,4 +1,4 @@
-package org.com.lessons.orphan_removal;
+package org.com.lessons.orp_rem.one_to_many;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -6,7 +6,9 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import lombok.Cleanup;
 
-class TestOR {
+import java.util.List;
+
+class TestOrList {
     public static void main(String[] args) {
 
         @Cleanup
@@ -17,21 +19,39 @@ class TestOR {
 
         EntityTransaction transaction = em.getTransaction();
 
-        OrChild child = OrChild
+        transaction.begin();
+
+        OrListChild child1 = OrListChild
                 .builder()
                 .age(10)
                 .build();
 
-        OrParent parent = OrParent
+        OrListChild child2 = OrListChild
                 .builder()
-                .name("John")
-                .child(child)
+                .age(15)
                 .build();
 
-        em.persist(parent);
+        OrListParent parent = OrListParent
+                .builder()
+                .list(List.of(child1, child2))
+                .name("John")
+                .build();
+
+//        em.persist(parent);
+
+        OrListParent parent1 = em.find(OrListParent.class, 2);
+
+        List<OrListChild> list = parent1.getList();
+        list.set(0, null);
 
         transaction.commit();
 
     }
 }
 
+/**
+ * 1) Saving Person - service Person
+ * 2) Find Person by id - service Person
+ * 3) Set person into ad - psvm
+ * 4) Saving ad - service Ad
+ */

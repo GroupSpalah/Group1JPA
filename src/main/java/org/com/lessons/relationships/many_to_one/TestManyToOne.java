@@ -5,13 +5,10 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import lombok.Cleanup;
-import org.com.lessons.orphan_removal.OrChild;
-import org.com.lessons.orphan_removal.OrParent;
-import org.com.lessons.relationships.one_to_many.uni.Leaf;
-import org.com.lessons.relationships.one_to_many.uni.Tree;
+import org.com.lessons.orp_rem.one_to_one.OrChild;
+import org.com.lessons.orp_rem.one_to_one.OrParent;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 class TestManyToOne {
     public static void main(String[] args) {
@@ -54,7 +51,11 @@ class TestManyToOne {
                 .child(child)
                 .build();
 
-        em.persist(parent);
+//        em.persist(parent);
+
+        OrParent orParent = em.find(OrParent.class, 1);
+
+        orParent.setChild(null);
 
         transaction.commit();
 
