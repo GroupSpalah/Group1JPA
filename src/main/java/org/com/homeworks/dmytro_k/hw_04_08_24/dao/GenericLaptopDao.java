@@ -1,9 +1,17 @@
-package org.com.homeworks.dmytro_k.hw_04_08_24.service;
+package org.com.homeworks.dmytro_k.hw_04_08_24.dao;
+
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public interface LaptopService<T, ID> {
+import static org.com.homeworks.dmytro_k.hw_04_08_24.util.ConstantsUtil.UNIT_NAME;
+
+public interface GenericLaptopDao<T, ID> {
+
+    EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory(UNIT_NAME);
+
     void addLaptop(T laptop);
 
     T findById(ID id);
@@ -21,9 +29,10 @@ public interface LaptopService<T, ID> {
 
     void deleteByProcessor(String value);
 
-    void deleteByRamAndSsd(int firstParam, int secondParam);
+    void deleteByRamAndSsd(int ram, int ssd);
 
     void update(T laptop);
 
+    //для переноса таблицы
     List<T> getAllLaptop();
 }

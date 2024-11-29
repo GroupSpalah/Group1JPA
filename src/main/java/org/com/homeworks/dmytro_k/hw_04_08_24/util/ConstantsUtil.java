@@ -11,6 +11,7 @@ public class ConstantsUtil {
             "WHERE l.processor " +
             "LIKE :processor";
     public static final String PROCESSOR = "processor";
+    public static final String RELEASE_DATE_JAVA = "releaseDate";
     public static final String FILTER_BY_PROCESSOR = "SELECT l FROM Laptop l " +
             "WHERE l.processor " +
             "LIKE :processor";
@@ -33,4 +34,6 @@ public class ConstantsUtil {
                     "WHERE l.id = :laptop_id";
 
 
+    public static final String DATABASE_NAME = "LaptopDB";
+    public static final String COLLECTION_NAME = "laptopsCollection";
 }

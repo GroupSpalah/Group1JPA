@@ -1,4 +1,4 @@
-package org.com.homeworks.dmytro_k.hw_04_08_24.dao.impl;
+package org.com.homeworks.dmytro_k.hw_04_08_24.dao.MySQLDAOimpl;
 
 /**
  * ---
@@ -38,7 +38,7 @@ package org.com.homeworks.dmytro_k.hw_04_08_24.dao.impl;
 
 import jakarta.persistence.*;
 import lombok.Cleanup;
-import org.com.homeworks.dmytro_k.hw_04_08_24.dao.LaptopDao;
+import org.com.homeworks.dmytro_k.hw_04_08_24.dao.GenericLaptopDao;
 import org.com.homeworks.dmytro_k.hw_04_08_24.domain.Laptop;
 import org.jetbrains.annotations.NotNull;
 
@@ -47,14 +47,11 @@ import java.util.List;
 
 import static org.com.homeworks.dmytro_k.hw_04_08_24.util.ConstantsUtil.*;
 
-public class LaptopDaoImpl implements LaptopDao {
-
+public class MySQLLaptopDaoImpl implements GenericLaptopDao<Laptop, Integer> {
 
     public void addLaptop(Laptop laptop) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -63,11 +60,9 @@ public class LaptopDaoImpl implements LaptopDao {
         transaction.commit();
     }
 
-    public Laptop findById(int id) {
+    public Laptop findById(Integer id) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -78,9 +73,7 @@ public class LaptopDaoImpl implements LaptopDao {
 
     public void printAllLaptop() {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -90,11 +83,21 @@ public class LaptopDaoImpl implements LaptopDao {
         transaction.commit();
     }
 
+    public List<Laptop> getAllLaptop() {
+        @Cleanup
+        EntityManager em = FACTORY.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+
+        TypedQuery<Laptop> query = em.createQuery(ALL_LAPTOP, Laptop.class);
+        List<Laptop> laptopList = query.getResultList();
+        transaction.commit();
+        return laptopList;
+    }
+
     private void filterByParam(String inputQuery, String param, String value) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -107,9 +110,7 @@ public class LaptopDaoImpl implements LaptopDao {
 
     public void filterByReleaseDate(LocalDate date) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -121,18 +122,16 @@ public class LaptopDaoImpl implements LaptopDao {
         transaction.commit();
     }
 
-    public void filterByTwoParam(String inputQuery, String firstParam, String secondParam,
-                                 int firstValue, int secondValue) {
+    public void filterByTwoParam(/*String inputQuery,*/ String firstParam, String secondParam,
+                                                        java.lang.Object firstValue, java.lang.Object secondValue) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
 
         transaction.begin();
 
-        TypedQuery<Laptop> query = em.createQuery(inputQuery, Laptop.class);
+        TypedQuery<Laptop> query = em.createQuery(FILTER_BY_RAM_AND_SSD, Laptop.class);
         query.setParameter(firstParam, firstValue);
         query.setParameter(secondParam, secondValue);
 
@@ -141,19 +140,17 @@ public class LaptopDaoImpl implements LaptopDao {
         transaction.commit();
     }
 
-    public void filterByModel(String param, String value) {
-        filterByParam(FILTER_BY_MODEL, param, value);
+    public void filterByModel(String value) {
+        filterByParam(FILTER_BY_MODEL, MODEL, value);
     }
 
-    public void filerByProcessor(String param, String value) {
-        filterByParam(FILTER_BY_PROCESSOR, param, value);
+    public void filerByProcessor(String value) {
+        filterByParam(FILTER_BY_PROCESSOR, PROCESSOR, value);
     }
 
     public void deleteByProcessor(String value) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -166,9 +163,7 @@ public class LaptopDaoImpl implements LaptopDao {
 
     public void deleteByRamAndSsd(int firstParam, int secondParam) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -183,9 +178,7 @@ public class LaptopDaoImpl implements LaptopDao {
 
     public void update(@NotNull Laptop laptop) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
