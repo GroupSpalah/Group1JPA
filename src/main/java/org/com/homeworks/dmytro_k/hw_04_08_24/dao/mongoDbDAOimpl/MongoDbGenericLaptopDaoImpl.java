@@ -111,6 +111,7 @@ public class MongoDbGenericLaptopDaoImpl implements GenericLaptopDao<LaptopDocum
                         , laptopDocument);
     }
 
+    @Override
     public List<LaptopDocument> getAllLaptop() {
         List<LaptopDocument> allLaptop = new ArrayList<>();
 

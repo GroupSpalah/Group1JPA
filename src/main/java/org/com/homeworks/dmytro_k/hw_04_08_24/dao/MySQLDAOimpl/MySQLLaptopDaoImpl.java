@@ -49,6 +49,7 @@ import static org.com.homeworks.dmytro_k.hw_04_08_24.util.ConstantsUtil.*;
 
 public class MySQLLaptopDaoImpl implements GenericLaptopDao<Laptop, Integer> {
 
+    @Override
     public void addLaptop(Laptop laptop) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -60,6 +61,7 @@ public class MySQLLaptopDaoImpl implements GenericLaptopDao<Laptop, Integer> {
         transaction.commit();
     }
 
+    @Override
     public Laptop findById(Integer id) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -71,6 +73,7 @@ public class MySQLLaptopDaoImpl implements GenericLaptopDao<Laptop, Integer> {
         return laptop;
     }
 
+    @Override
     public void printAllLaptop() {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -83,6 +86,7 @@ public class MySQLLaptopDaoImpl implements GenericLaptopDao<Laptop, Integer> {
         transaction.commit();
     }
 
+    @Override
     public List<Laptop> getAllLaptop() {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -108,6 +112,7 @@ public class MySQLLaptopDaoImpl implements GenericLaptopDao<Laptop, Integer> {
         transaction.commit();
     }
 
+    @Override
     public void filterByReleaseDate(LocalDate date) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -122,6 +127,7 @@ public class MySQLLaptopDaoImpl implements GenericLaptopDao<Laptop, Integer> {
         transaction.commit();
     }
 
+    @Override
     public void filterByTwoParam(/*String inputQuery,*/ String firstParam, String secondParam,
                                                         java.lang.Object firstValue, java.lang.Object secondValue) {
         @Cleanup
@@ -140,14 +146,17 @@ public class MySQLLaptopDaoImpl implements GenericLaptopDao<Laptop, Integer> {
         transaction.commit();
     }
 
+    @Override
     public void filterByModel(String value) {
         filterByParam(FILTER_BY_MODEL, MODEL, value);
     }
 
+    @Override
     public void filerByProcessor(String value) {
         filterByParam(FILTER_BY_PROCESSOR, PROCESSOR, value);
     }
 
+    @Override
     public void deleteByProcessor(String value) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -161,6 +170,7 @@ public class MySQLLaptopDaoImpl implements GenericLaptopDao<Laptop, Integer> {
         transaction.commit();
     }
 
+    @Override
     public void deleteByRamAndSsd(int firstParam, int secondParam) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -176,6 +186,7 @@ public class MySQLLaptopDaoImpl implements GenericLaptopDao<Laptop, Integer> {
         transaction.commit();
     }
 
+    @Override
     public void update(@NotNull Laptop laptop) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
