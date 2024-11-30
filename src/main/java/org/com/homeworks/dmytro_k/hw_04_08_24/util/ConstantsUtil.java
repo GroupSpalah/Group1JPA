@@ -12,6 +12,8 @@ public class ConstantsUtil {
             "LIKE :processor";
     public static final String PROCESSOR = "processor";
     public static final String RELEASE_DATE_JAVA = "releaseDate";
+    public static final String RAM_CAPACITY_JAVA = "ramCapacity";
+    public static final String SSD_CAPACITY_JAVA = "ssdCapacity";
     public static final String FILTER_BY_PROCESSOR = "SELECT l FROM Laptop l " +
             "WHERE l.processor " +
             "LIKE :processor";
