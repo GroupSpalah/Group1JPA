@@ -100,8 +100,8 @@ public class MongoDbGenericLaptopDaoImpl implements GenericLaptopDao<LaptopDocum
     @Override
     public void deleteByRamAndSsd(int ram, int ssd) {
         laptopsCollection
-                .deleteMany(Filters.and(Filters.eq("rAMCapacity", ram),
-                        Filters.eq("sSDCapacity", ssd)));
+                .deleteMany(Filters.and(Filters.eq("ramCapacity", ram),
+                        Filters.eq("ssdCapacity", ssd)));
     }
 
     @Override
