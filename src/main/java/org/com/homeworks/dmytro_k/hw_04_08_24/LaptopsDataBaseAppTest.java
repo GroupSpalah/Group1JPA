@@ -89,9 +89,9 @@ public class LaptopsDataBaseAppTest {
         //genericLaptopDao.deleteByRamAndSsd(32, 2048);//++ удаляет по полному совпадению двух значений
         //genericLaptopDao.filterByReleaseDate(LocalDate.of(2025, 4, 20));//++
         //регистр имеет значение при указании поля для фильтрации. Автоматически поле записывается в базу с маленькой буквы.
-        //genericLaptopDao.filterByTwoParam("model", "rAMCapacity", "Yoga Slim 20", 32);//++
+        //genericLaptopDao.filterByTwoParam("model", "ramCapacity", "Yoga Slim 20", 32);//++
 
-        //genericLaptopDao.filterByTwoParam("model", "rAMCapacity", "Yoga Slim 20", 42);//++
+        //genericLaptopDao.filterByTwoParam("model", "ramCapacity", "Yoga Slim 20", 42);//++
 
         //laptopDocumentDao.update(newLenovoD);//++
 
